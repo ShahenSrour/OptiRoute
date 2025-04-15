@@ -2,51 +2,235 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSH</title>
-    <link rel="icon" href="assets/SQUARED.png" type="image/icon type">
-    <link rel="stylesheet" href="styles.css">
-    <script src="app.js" defer></script>
-    <script src="https://kit.fontawesome.com/433cce3012.js" crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    OptiRoute Driver
+  </title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body>
-    <nav>
-        <div class="width_limiter">
-            <section class="navbar_dash">
-                <a class="Main_logo_dash_anchor" href="index.html"><img class="Main_logo" src="assets/MiniLogo.png" alt=""></a>
-                <div class="nav_menu">
-                    <a href="contactus.html"><h1 class="CONTACT_US">Contact Us</h1></a>
-                    <a href="dashboard.html"><h1 class="MANAGE_CLIENTS">Projects</h1></a>
-                    <a href="profile.html"><h1 class="MANAGE_PROFILE">Profile</h1></a>
-                </div>
-            </section>
-        </div>
-    </nav>
-    <section class="dashboard">
-        <button class="add-project-btn">+ Add Client</button>
-        <div class="projects" id="projects-container">
-            <!-- Projects will be added dynamically here -->
-        </div>
-    </section>
-    <div class="overlay" id="overlay"></div>
-    <div class="form-container" id="form-container">
-        <h3 class="form-title_add_new_project">Add New Client</h3>
-        <input type="text" id="project-name" placeholder="Client Name" required>
-        <select id="project-status">
-            <option value="Active Client">Active Client</option>
-            <option value="In Active Client">In Active Client</option>
-        </select>
-        <button id="add-project">Add Client</button>
-        <button id="cancel-form">Cancel</button>
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+          <div class="logo-image-small">
+     
+          </div>
+        </a>
+        <a href="/index.html" class="simple-text logo-normal">
+          OptiRoute
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li>
+            <a href="./dashboard.html">
+              <i class="nc-icon nc-bank"></i>
+              <p>Dispatcher View</p>
+            </a>
+          </li>
+          <li class="active">
+            <a href="./clients.html">
+              <i class="nc-icon nc-single-02"></i>
+              <p>Driver View</p>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-
-    <footer>
-        <div class="width_limiter">
-            <h1 class="copyright">© Copyright 2025, JOSS Inc. All Rights Reserved.</h1>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Driver Route View</a>
+          </div>
         </div>
-    </footer>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Driver View</h4>
+                </div>
+                <div class="card-body">
+                  <div id="driverNotification" class="alert alert-info" style="display: none;">
+                    <strong>New Route Assigned!</strong> Please follow the route below.
+                  </div>
+                  <div id="noRouteMessage" class="alert alert-warning">
+                    No route currently assigned. Please wait for dispatcher to assign a route.
+                  </div>
+                  <div id="routeContainer" style="display: none;">
+                    <div id="driverMap"
+                      style="height: 400px; background-color: #f5f5f5; border-radius: 4px; position: relative; margin-bottom: 20px;">
+                      <!-- Map markers will be added here -->
+                    </div>
+                    <div class="route-instructions" id="driverRouteList">
+                      <!-- Route stops will be listed here -->
+                    </div>
+                    <div class="text-center mt-3">
+                      <button id="startRouteBtn" class="btn btn-primary">Start Route</button>
+                      <button id="completeRouteBtn" class="btn btn-success" style="display: none;">Complete
+                        Route</button>
+                      <a href="dashboard.html" class="btn btn-secondary">Dispatcher View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer-black  footer-white ">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="credits ml-auto">
+              <span class="copyright">
+                ©
+                <script>
+                  document.write(new Date().getFullYear())
+                </script>, made with <i class="fa fa-heart heart"></i> by OptiRoute
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <!-- Chart JS -->
+  <script src="assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+  <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+  <script src="assets/demo/demo.js"></script>
+  <script>
+    // Check for assigned route
+    function checkForRoute() {
+      const route = localStorage.getItem('currentRoute');
+      const assignedTime = localStorage.getItem('routeAssignedTime');
+
+      if (route) {
+        const routeData = JSON.parse(route);
+
+        // Show notification if route was assigned recently
+        const notification = document.getElementById('driverNotification');
+        const noRouteMessage = document.getElementById('noRouteMessage');
+        const routeContainer = document.getElementById('routeContainer');
+
+        notification.style.display = 'block';
+        noRouteMessage.style.display = 'none';
+        routeContainer.style.display = 'block';
+
+        // Display route
+        displayDriverRoute(routeData);
+      }
+    }
+
+    // Display route for driver
+    function displayDriverRoute(routeOrders) {
+      const driverMap = document.getElementById('driverMap');
+      const driverRouteList = document.getElementById('driverRouteList');
+
+      // Clear previous map and route
+      driverMap.innerHTML = '';
+      driverRouteList.innerHTML = '';
+
+      // Create map markers
+      routeOrders.forEach((order, index) => {
+        // Create a fake map marker (positioned randomly for demo)
+        const marker = document.createElement('div');
+        marker.style.position = 'absolute';
+        marker.style.left = `${20 + (index * 15)}%`;
+        marker.style.top = `${30 + (index % 2 * 30)}%`;
+        marker.style.width = '30px';
+        marker.style.height = '30px';
+        marker.style.backgroundColor = order.userStatus === 'premium' ? '#ff9800' : '#4caf50';
+        marker.style.borderRadius = '50%';
+        marker.style.display = 'flex';
+        marker.style.alignItems = 'center';
+        marker.style.justifyContent = 'center';
+        marker.style.color = 'white';
+        marker.style.fontWeight = 'bold';
+        marker.textContent = index + 1;
+        marker.title = `${order.customerName} (Priority: ${order.points})`;
+
+        driverMap.appendChild(marker);
+
+        // Add connecting lines (except last marker)
+        if (index < routeOrders.length - 1) {
+          const line = document.createElement('div');
+          line.style.position = 'absolute';
+          line.style.left = `${20 + (index * 15) + 5}%`;
+          line.style.top = `${30 + (index % 2 * 30) + 15}%`;
+          line.style.width = '10%';
+          line.style.height = '2px';
+          line.style.backgroundColor = '#666';
+          driverMap.appendChild(line);
+        }
+
+        // Add to route list
+        const routeItem = document.createElement('div');
+        routeItem.className = 'route-step mb-3 p-3 border rounded';
+        routeItem.innerHTML = `
+          <div class="step-number" style="display: inline-block; width: 30px; height: 30px; background-color: ${order.userStatus === 'premium' ? '#ff9800' : '#4caf50'}; color: white; border-radius: 50%; text-align: center; line-height: 30px; margin-right: 10px;">${index + 1}</div>
+          <div style="display: inline-block; vertical-align: top;">
+            <strong>${order.customerName}</strong>
+            <div>${order.deliveryAddress}</div>
+            <div>Priority: ${order.points} points</div>
+            <div class="mt-2">
+              <span class="badge ${order.userStatus === 'premium' ? 'badge-warning' : 'badge-secondary'}">${order.userStatus === 'premium' ? 'Premium' : 'Normal'}</span>
+              <span class="badge ${order.perishable === 'yes' ? 'badge-danger' : 'badge-info'}">${order.perishable === 'yes' ? 'Perishable' : 'Non-perishable'}</span>
+            </div>
+          </div>
+        `;
+        driverRouteList.appendChild(routeItem);
+      });
+    }
+
+    // Start route button
+    document.getElementById('startRouteBtn').addEventListener('click', function () {
+      this.style.display = 'none';
+      document.getElementById('completeRouteBtn').style.display = 'inline-block';
+      alert('Route started! Follow the numbered stops in order.');
+    });
+
+    // Complete route button
+    document.getElementById('completeRouteBtn').addEventListener('click', function () {
+      localStorage.removeItem('currentRoute');
+      localStorage.removeItem('routeAssignedTime');
+      alert('Route completed successfully!');
+      window.location.reload();
+    });
+
+    // Check for route when page loads
+    window.addEventListener('load', checkForRoute);
+  </script>
 </body>
 
 </html>

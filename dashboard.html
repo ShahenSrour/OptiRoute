@@ -2,51 +2,344 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSH</title>
-    <link rel="icon" href="assets/SQUARED.png" type="image/icon type">
-    <link rel="stylesheet" href="styles.css">
-    <script src="app.js" defer></script>
-    <script src="https://kit.fontawesome.com/433cce3012.js" crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    OptiRoute Dashboard
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body>
-    <nav>
-        <div class="width_limiter">
-            <section class="navbar_dash">
-                <a class="Main_logo_dash_anchor" href="index.html"><img class="Main_logo_dash" src="assets/MiniLogo.png" alt=""></a>
-                <div class="nav_menu">
-                    <a href="contactus.html"><h1 class="CONTACT_US">Contact Us</h1></a>
-                    <a href="clients.html"><h1 class="MANAGE_CLIENTS">Clients</h1></a>
-                    <a href="profile.html"><h1 class="MANAGE_PROFILE">Profile</h1></a>
-                </div>
-            </section>
-        </div>
-    </nav>
-    <section class="dashboard">
-        <button class="add-project-btn">+ Add Project</button>
-        <div class="projects" id="projects-container">
-            <!-- Projects will be added dynamically here -->
-        </div>
-    </section>
-    <div class="overlay" id="overlay"></div>
-    <div class="form-container" id="form-container">
-        <h3 class="form-title_add_new_project">Add New Project</h3>
-        <input type="text" id="project-name" placeholder="Project Name" required>
-        <select id="project-status">
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-        </select>
-        <button id="add-project">Add Project</button>
-        <button id="cancel-form">Cancel</button>
-    </div>
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+          <div class="logo-image-small">
 
-    <footer>
-        <div class="width_limiter">
-            <h1 class="copyright">© Copyright 2025, JOSS Inc. All Rights Reserved.</h1>
+          </div>
+        </a>
+        <a href="/index.html" class="simple-text logo-normal">
+          OptiRoute
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="active">
+            <a href="./dashboard.html">
+              <i class="nc-icon nc-bank"></i>
+              <p>Dispatcher View</p>
+            </a>
+          </li>
+          <li>
+            <a href="./clients.html">
+              <i class="nc-icon nc-single-02"></i>
+              <p>Driver View</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Priority Delivery System</a>
+          </div>
         </div>
-    </footer>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Create New Order</h4>
+                </div>
+                <div class="card-body">
+                  <form id="orderForm">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>Customer Name</label>
+                          <input type="text" class="form-control" id="customerName" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>Delivery Address</label>
+                          <input type="text" class="form-control" id="deliveryAddress" required>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <label>User Status</label>
+                          <select class="form-control" id="userStatus">
+                            <option value="normal">Normal User</option>
+                            <option value="premium">Premium Member</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <label>Contains Perishable Items?</label>
+                          <select class="form-control" id="perishable">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Order</button>
+                  </form>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Current Orders</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table" id="ordersTable">
+                      <thead class="text-primary">
+                        <tr>
+                          <th>Customer</th>
+                          <th>Address</th>
+                          <th>Status</th>
+                          <th>Perishable</th>
+                          <th>Points</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="ordersList">
+                        <!-- Orders will be added here dynamically -->
+                      </tbody>
+                    </table>
+                  </div>
+                  <button id="makeRouteBtn" class="btn btn-success" disabled>Make Route</button>
+                </div>
+              </div>
+              
+              <div class="card" id="routeCard" style="display: none;">
+                <div class="card-header">
+                  <h4 class="card-title">Optimized Route</h4>
+                </div>
+                <div class="card-body">
+                  <div id="fakeMap" style="height: 400px; background-color: #f5f5f5; border-radius: 4px; position: relative;">
+                    <!-- Map markers will be added here -->
+                  </div>
+                  <div class="route-list mt-3" id="routeList">
+                    <!-- Route stops will be listed here -->
+                  </div>
+                  <button id="sendToDriverBtn" class="btn btn-info">Send to Driver</button>
+                  <a href="clients.html" class="btn btn-secondary">Driver View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer-black  footer-white ">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="credits ml-auto">
+              <span class="copyright">
+                © <script>
+                  document.write(new Date().getFullYear())
+                </script>, made with <i class="fa fa-heart heart"></i> by OptiRoute
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <!-- Chart JS -->
+  <script src="assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+  <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+  <script src="assets/demo/demo.js"></script>
+  <script>
+    // Store orders
+    let orders = [];
+    
+    // Form submission
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const customerName = document.getElementById('customerName').value;
+      const deliveryAddress = document.getElementById('deliveryAddress').value;
+      const userStatus = document.getElementById('userStatus').value;
+      const perishable = document.getElementById('perishable').value;
+      
+      // Calculate points
+      let points = 0;
+      if (userStatus === 'premium') points += 1;
+      if (perishable === 'yes') points += 1.5;
+      
+      // Create order object
+      const order = {
+        id: Date.now(),
+        customerName,
+        deliveryAddress,
+        userStatus,
+        perishable,
+        points,
+        selected: false
+      };
+      
+      orders.push(order);
+      renderOrders();
+      resetForm();
+      
+      // Enable make route button if we have orders
+      document.getElementById('makeRouteBtn').disabled = orders.length === 0;
+    });
+    
+    // Render orders table
+    function renderOrders() {
+      const tbody = document.getElementById('ordersList');
+      tbody.innerHTML = '';
+      
+      orders.forEach(order => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${order.customerName}</td>
+          <td>${order.deliveryAddress}</td>
+          <td>${order.userStatus === 'premium' ? 'Premium' : 'Normal'}</td>
+          <td>${order.perishable === 'yes' ? 'Yes' : 'No'}</td>
+          <td>${order.points}</td>
+          <td>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input select-order" type="checkbox" data-id="${order.id}" ${order.selected ? 'checked' : ''}>
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      
+      // Add event listeners to checkboxes
+      document.querySelectorAll('.select-order').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const orderId = parseInt(this.getAttribute('data-id'));
+          const order = orders.find(o => o.id === orderId);
+          if (order) {
+            order.selected = this.checked;
+          }
+        });
+      });
+    }
+    
+    // Reset form
+    function resetForm() {
+      document.getElementById('orderForm').reset();
+    }
+    
+    // Make route button click
+    document.getElementById('makeRouteBtn').addEventListener('click', function() {
+      // Get selected orders
+      const selectedOrders = orders.filter(order => order.selected);
+      
+      if (selectedOrders.length === 0) {
+        alert('Please select at least one order to create a route');
+        return;
+      }
+      
+      // Sort by points (descending)
+      selectedOrders.sort((a, b) => b.points - a.points);
+      
+      // Display route
+      displayRoute(selectedOrders);
+    });
+    
+    // Display route on fake map
+    function displayRoute(routeOrders) {
+      const routeCard = document.getElementById('routeCard');
+      const fakeMap = document.getElementById('fakeMap');
+      const routeList = document.getElementById('routeList');
+      
+      // Clear previous map and route
+      fakeMap.innerHTML = '';
+      routeList.innerHTML = '';
+      
+      // Create map markers
+      routeOrders.forEach((order, index) => {
+        // Create a fake map marker (positioned randomly for demo)
+        const marker = document.createElement('div');
+        marker.style.position = 'absolute';
+        marker.style.left = `${20 + (index * 15)}%`;
+        marker.style.top = `${30 + (index % 2 * 30)}%`;
+        marker.style.width = '30px';
+        marker.style.height = '30px';
+        marker.style.backgroundColor = order.userStatus === 'premium' ? '#ff9800' : '#4caf50';
+        marker.style.borderRadius = '50%';
+        marker.style.display = 'flex';
+        marker.style.alignItems = 'center';
+        marker.style.justifyContent = 'center';
+        marker.style.color = 'white';
+        marker.style.fontWeight = 'bold';
+        marker.textContent = index + 1;
+        marker.title = `${order.customerName} (${order.points} pts)`;
+        
+        fakeMap.appendChild(marker);
+        
+        // Add to route list
+        const routeItem = document.createElement('div');
+        routeItem.className = 'route-item mb-2 p-2 border rounded';
+        routeItem.innerHTML = `
+          <strong>${index + 1}. ${order.customerName}</strong>
+          <div>Address: ${order.deliveryAddress}</div>
+          <div>Status: ${order.userStatus === 'premium' ? 'Premium' : 'Normal'}</div>
+          <div>Perishable: ${order.perishable === 'yes' ? 'Yes' : 'No'}</div>
+          <div>Priority Points: ${order.points}</div>
+        `;
+        routeList.appendChild(routeItem);
+      });
+      
+      // Show route card
+      routeCard.style.display = 'block';
+    }
+    
+    // Send to driver button
+    document.getElementById('sendToDriverBtn').addEventListener('click', function() {
+      // In a real app, this would send the route to the driver via API
+      // For this demo, we'll just store it in localStorage
+      const selectedOrders = orders.filter(order => order.selected);
+      const sortedRoute = selectedOrders.sort((a, b) => b.points - a.points);
+      
+      localStorage.setItem('currentRoute', JSON.stringify(sortedRoute));
+      localStorage.setItem('routeAssignedTime', new Date().toISOString());
+      
+      alert('Route has been sent to the driver!');
+    });
+  </script>
 </body>
 
 </html>
